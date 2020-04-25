@@ -1,0 +1,14 @@
+<style type="text/css">
+	div{
+		text-align: center;
+	}
+</style>
+<h1>Demo for dynamic partials</h1>
+<p>{{headline}}</p>
+<div>
+{% if headline %}
+	<h1> YES It is CHRISTMAS!</h1>
+{% else %}
+	<h1>NO</h1>
+{% endif %}
+</div>
