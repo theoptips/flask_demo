@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+	Session
+{% endblock %}
+
+
+{% block body %}
+	<li>
+		{% for note in notes %}
+			<li>{{ note }}</li>
+		{% endfor %}
+	</li>
+
+	<!-- due an error with flask-session this page is not working -->
+	<!-- return to the same page -->
+	<!-- this page functions similarly as angular which can dynamically modify a page and add display data that persists temporarily  -->
+	<!-- when using session, server will save the page and display nicely  -->
+	<!-- if server restarts or if user clear cache, this can display, need database -->
+	<form action="{{ url_for('sess') }}" method="POST">
+		<input type="text" name="note" placeholder="Enter note here">
+		<button>Add Note</button>
+		
+	</form>
+{% endblock %}

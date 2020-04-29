@@ -1,8 +1,17 @@
 # import Flask class
 # render_template is for html partials
 # request is for form methods
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
+# above session is flask native
+# below session is external
+# flask_session stores session server side
+# dependency pip3 install flask-session
+# ModuleNotFoundError: No module named 'werkzeug.contrib'
+# breaking issue in werkzeug1.0.0
+from flask_session import Session
+
 import datetime
+
 
 # by convention need to type this line
 # __name__ just saying the current file is the flask app
@@ -102,3 +111,26 @@ def forms_submit():
 	else:
 		name = request.form.get("name")
 		return render_template("forms_submit.html", name=name)
+
+# there's an error because of werkzeug.contrib deprecation
+# customize user view using Session
+'''
+app.config['SESSION_PERMANENT'] = False
+app.config['SESSION_TYPE'] = 'filesystem'
+Session(app)
+notes = []
+@app.route("/", method=['GET','POST'])
+def sess():
+	if request.method == "POST":
+		notes = request.form.get("note")
+		notes.append(note)
+	return render_template('session.html', notes=notes)
+
+
+# instead of having global session
+# we can define in the sess()
+# if session.get("note") is None:
+	# session["notes"] = []
+# session["notes"].append(note)
+# then this is session unique to the user
+'''
